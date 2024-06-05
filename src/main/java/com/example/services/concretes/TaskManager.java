@@ -13,6 +13,7 @@ import com.example.services.abstracts.TaskService;
 import com.example.services.dtos.requests.AddTaskRequest;
 import com.example.services.dtos.requests.UpdateTaskRequest;
 import com.example.services.dtos.responses.GetTaskResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +48,7 @@ public class TaskManager implements TaskService {
     }
 
     @Override
-    public Result addTask(AddTaskRequest addTaskRequest) {
+    public Result addTask(@Valid AddTaskRequest addTaskRequest) {
         Task task = this.mapperService.forRequest().map(addTaskRequest, Task.class);
 
         this.taskRepository.save(task);
