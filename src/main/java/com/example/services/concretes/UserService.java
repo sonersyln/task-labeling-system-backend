@@ -1,2 +1,57 @@
-package com.example.services.concretes;public class UserService {
+package com.example.services.concretes;
+
+import com.example.core.exceptions.InvalidPasswordException;
+import com.example.core.exceptions.NotFoundException;
+import com.example.core.utilities.constants.MessageConstants;
+import com.example.models.User;
+import com.example.repositories.UserRepository;
+import com.example.services.dtos.requests.AddUserRequest;
+import com.example.services.dtos.requests.SignInRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class UserService {
+    private final UserRepository userRepository;
+
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public Optional<User> getByUserName(String username) {
+        return this.userRepository.findByUsername(username);
+    }
+
+    public User createUser(AddUserRequest request){
+        User newUser = User.builder()
+                .username(request.getUsername())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .email(request.getEmail())
+                .accountNonExpired(true)
+                .isEnabled(true)
+                .accountNonLocked(true)
+                .credentialsNonExpired(true)
+                .authorities(request.getAuthorities())
+
+            .build();
+        return this.userRepository.save(newUser);
+    }
+
+    public void singIn(SignInRequest request){
+
+        Optional<User> user = this.userRepository.findByUsername(request.getUsername());
+        if(user.isEmpty()){
+            throw new NotFoundException(MessageConstants.USER_NOT_FOUND.getMessage());
+        }
+        if(!passwordEncoder.matches(request.getPassword(), user.get().getPassword())){
+            throw new InvalidPasswordException(MessageConstants.INVALID_PASSWORD.getMessage());
+        }
+    }
+
+
 }

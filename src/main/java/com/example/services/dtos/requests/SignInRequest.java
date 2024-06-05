@@ -1,2 +1,15 @@
-package com.example.services.dtos.requests;public class SignInRequest {
+package com.example.services.dtos.requests;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class SignInRequest {
+    private String username;
+    private String password;
 }
