@@ -4,13 +4,16 @@ public enum MessageConstants {
     LABEL("Label"),
     NOT_FOUND(" not found!"),
     TASK("Task"),
+    USER("User"),
 
 
     ADD("The addition operation was successful!"),
     UPDATE("The update operation was successful!"),
     DELETE("The deletion operation was successful!"),
     GET_ALL("All records were listed!"),
-    GET("The record was found!");
+    GET("The record was found!"),
+    INVALID_PASSWORD("Invalid Password"),
+    USER_NOT_FOUND("User not found!");
 
     private final String message;
 
