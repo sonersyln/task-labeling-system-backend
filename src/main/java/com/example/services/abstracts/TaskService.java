@@ -15,6 +15,8 @@ public interface TaskService {
 
     Result addTask(@Valid AddTaskRequest addTaskRequest);
 
+    Result addLabelToTask(int taskId, int labelId);
+
     Result updateTask(UpdateTaskRequest updateTaskRequest);
 
     Result deleteTask(int id);

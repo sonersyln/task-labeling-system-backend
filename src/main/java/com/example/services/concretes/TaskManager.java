@@ -7,7 +7,9 @@ import com.example.core.utilities.results.DataResult;
 import com.example.core.utilities.results.Result;
 import com.example.core.utilities.results.SuccessDataResult;
 import com.example.core.utilities.results.SuccessResult;
+import com.example.models.Label;
 import com.example.models.Task;
+import com.example.repositories.LabelRepository;
 import com.example.repositories.TaskRepository;
 import com.example.services.abstracts.TaskService;
 import com.example.services.dtos.requests.AddTaskRequest;
@@ -18,12 +20,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class TaskManager implements TaskService {
 
     private final TaskRepository taskRepository;
+    private final LabelRepository labelRepository;
     private ModelMapperService mapperService;
 
     @Override
@@ -74,5 +78,18 @@ public class TaskManager implements TaskService {
         this.taskRepository.delete(task);
 
         return new SuccessResult(MessageConstants.DELETE.getMessage());
+    }
+    // Add a label to a task
+    @Override
+
+    public Result addLabelToTask(int taskId, int labelId) {
+        Task task = this.taskRepository.findById(taskId).orElseThrow(() -> new NotFoundException(MessageConstants.TASK.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
+        Label label = this.labelRepository.findById(labelId).orElseThrow(() -> new NotFoundException(MessageConstants.LABEL.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
+
+        task.getLabels().add(label);
+
+        this.taskRepository.save(task);
+
+        return new SuccessResult(MessageConstants.ADD.getMessage());
     }
 }

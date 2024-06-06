@@ -46,4 +46,9 @@ public class TaskController {
     public Result deleteTask(@PathVariable int id) {
         return this.taskService.deleteTask(id);
     }
+
+    @PostMapping("/{taskId}/labels/{labelId}")
+    public Result addLabelToTask(@PathVariable int taskId, @PathVariable int labelId) {
+        return taskService.addLabelToTask(taskId, labelId);
+    }
 }
