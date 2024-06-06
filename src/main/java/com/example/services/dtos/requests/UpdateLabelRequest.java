@@ -18,4 +18,5 @@ public class UpdateLabelRequest {
     @NotNull(message = "The label name cannot be null.")
     @NotBlank(message = "The label name can't be empty.")
     private String name;
+
 }
