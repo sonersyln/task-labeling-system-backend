@@ -28,10 +28,10 @@ public class LabelManager implements LabelService {
 
     @Override
     public DataResult<List<GetLabelResponse>> getAllLabels() {
-        List<Label> colors = this.labelRepository.findAll();
-        List<GetLabelResponse> responses = colors.stream().map(color -> this.mapperService
+        List<Label> labels = this.labelRepository.findAll();
+        List<GetLabelResponse> responses = labels.stream().map(label -> this.mapperService
                         .forResponse()
-                        .map(color, GetLabelResponse.class))
+                        .map(label, GetLabelResponse.class))
                 .collect(Collectors.toList());
 
         return new SuccessDataResult<>(responses, MessageConstants.GET_ALL.getMessage());
