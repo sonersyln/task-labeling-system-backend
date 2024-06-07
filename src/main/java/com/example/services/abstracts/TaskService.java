@@ -20,4 +20,7 @@ public interface TaskService {
     Result updateTask(UpdateTaskRequest updateTaskRequest);
 
     Result deleteTask(int id);
+
+    //get all tasks by label id
+    DataResult<List<GetTaskResponse>> getAllTasksByLabelId(int labelId);
 }

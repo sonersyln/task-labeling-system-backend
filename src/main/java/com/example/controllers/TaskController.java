@@ -51,4 +51,9 @@ public class TaskController {
     public Result addLabelToTask(@PathVariable int taskId, @PathVariable int labelId) {
         return taskService.addLabelToTask(taskId, labelId);
     }
+
+    @GetMapping("/labels/{labelId}")
+    public DataResult<List<GetTaskResponse>> getAllTasksByLabelId(@PathVariable int labelId) {
+        return taskService.getAllTasksByLabelId(labelId);
+    }
 }

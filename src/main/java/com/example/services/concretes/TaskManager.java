@@ -20,7 +20,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -91,5 +90,19 @@ public class TaskManager implements TaskService {
         this.taskRepository.save(task);
 
         return new SuccessResult(MessageConstants.ADD.getMessage());
+    }
+
+    //get all tasks by label id
+    @Override
+    public DataResult<List<GetTaskResponse>> getAllTasksByLabelId(int labelId) {
+        Label label = this.labelRepository.findById(labelId).orElseThrow(() -> new NotFoundException(MessageConstants.LABEL.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
+
+        List<Task> tasks = label.getTasks();
+        List<GetTaskResponse> responses = tasks.stream().map(task -> this.mapperService
+                .forResponse()
+                .map(task, GetTaskResponse.class))
+                .toList();
+
+        return new SuccessDataResult<>(responses, MessageConstants.GET_ALL.getMessage());
     }
 }
