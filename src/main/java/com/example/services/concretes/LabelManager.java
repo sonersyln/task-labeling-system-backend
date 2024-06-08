@@ -8,6 +8,7 @@ import com.example.core.utilities.results.Result;
 import com.example.core.utilities.results.SuccessDataResult;
 import com.example.core.utilities.results.SuccessResult;
 import com.example.models.Label;
+import com.example.models.Task;
 import com.example.repositories.LabelRepository;
 import com.example.services.abstracts.LabelService;
 import com.example.services.dtos.requests.AddLabelRequest;
@@ -16,6 +17,7 @@ import com.example.services.dtos.responses.GetLabelResponse;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,11 +70,32 @@ public class LabelManager implements LabelService {
     }
 
     @Override
+    @Transactional
     public Result deleteLabel(int id) {
-       Label label = this.labelRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(MessageConstants.LABEL.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
+        Label label = this.labelRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(MessageConstants.LABEL.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
 
-       this.labelRepository.delete(label);
-         return new SuccessResult(MessageConstants.DELETE.getMessage());
+        for (Task task : label.getTasks()) {
+            task.getLabels().remove(label);
+        }
+
+        this.labelRepository.delete(label);
+        return new SuccessResult(MessageConstants.DELETE.getMessage());
     }
+
+
+    @Override
+    public DataResult<List<GetLabelResponse>> getAllLabelsByTaskId(int taskId) {
+        List<Label> labels = this.labelRepository.findAllByTasks_Id(taskId);
+        List<GetLabelResponse> responses = labels.stream().map(label -> this.mapperService
+                        .forResponse()
+                        .map(label, GetLabelResponse.class))
+                .collect(Collectors.toList());
+
+        return new SuccessDataResult<>(responses, MessageConstants.GET_ALL.getMessage());
+    }
+
+
+
+
 }

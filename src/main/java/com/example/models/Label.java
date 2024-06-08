@@ -19,8 +19,9 @@ public class Label {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "labels")
+    @ManyToMany(mappedBy = "labels", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     private List<Task> tasks = new ArrayList<>();
+
 
 }

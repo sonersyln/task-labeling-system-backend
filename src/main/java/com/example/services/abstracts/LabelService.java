@@ -17,4 +17,7 @@ public interface LabelService {
     Result updateLabel(UpdateLabelRequest updateLabelRequest);
 
     Result deleteLabel(int id);
+
+    //getalllabel for task
+    DataResult<List<GetLabelResponse>> getAllLabelsByTaskId(int taskId);
 }

@@ -23,6 +23,7 @@ import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -99,12 +100,16 @@ public class TaskManager implements TaskService {
     }
 
     @Override
+    @Transactional
     public Result deleteTask(int id) {
+        Task task = this.taskRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(MessageConstants.TASK.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
 
-        Task task = this.taskRepository.findById(id).orElseThrow(() -> new NotFoundException(MessageConstants.TASK.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
+        for (Label label : task.getLabels()) {
+            label.getTasks().remove(task);
+        }
 
         this.taskRepository.delete(task);
-
         return new SuccessResult(MessageConstants.DELETE.getMessage());
     }
 

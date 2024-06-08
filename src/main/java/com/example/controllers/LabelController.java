@@ -47,4 +47,10 @@ public class LabelController {
         return this.labelService.deleteLabel(id);
     }
 
+    //getAllLabelsByTaskId
+    @GetMapping("/getAllLabelsByTaskId/{id}")
+    public DataResult<List<GetLabelResponse>> getAllLabelsByTaskId(@PathVariable int id) {
+        return this.labelService.getAllLabelsByTaskId(id);
+    }
+
 }
