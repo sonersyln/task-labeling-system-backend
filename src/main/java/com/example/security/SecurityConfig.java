@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(x -> x
                         .requestMatchers(AUTH_WHITE_LIST).permitAll()
                         .requestMatchers("/private/**").hasAnyRole(Role.ROLE_ADMIN.getValue(), Role.ROLE_USER.getValue())
+                        .anyRequest().authenticated()
 
         ).formLogin(AbstractHttpConfigurer::disable).httpBasic(Customizer.withDefaults());
         return security.build();

@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.example.models.Role;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,8 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String email;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Task> tasks;
 
     private boolean accountNonExpired;
     private boolean isEnabled;

@@ -15,7 +15,7 @@ import java.util.Set;
 public class Label {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column(name = "name", nullable = false)
     private String name;
 

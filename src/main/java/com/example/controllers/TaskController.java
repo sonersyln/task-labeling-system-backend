@@ -5,6 +5,7 @@ import com.example.core.utilities.results.Result;
 import com.example.services.abstracts.TaskService;
 import com.example.services.dtos.requests.AddTaskRequest;
 import com.example.services.dtos.requests.UpdateTaskRequest;
+import com.example.services.dtos.responses.GetTaskListResponse;
 import com.example.services.dtos.responses.GetTaskResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping()
-    public DataResult<List<GetTaskResponse>> getAllTasks() {
+    public DataResult<List<GetTaskListResponse>> getAllTasks() {
         return this.taskService.getAllTasks();
     }
 

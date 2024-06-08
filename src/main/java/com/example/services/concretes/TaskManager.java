@@ -14,6 +14,7 @@ import com.example.repositories.TaskRepository;
 import com.example.services.abstracts.TaskService;
 import com.example.services.dtos.requests.AddTaskRequest;
 import com.example.services.dtos.requests.UpdateTaskRequest;
+import com.example.services.dtos.responses.GetTaskListResponse;
 import com.example.services.dtos.responses.GetTaskResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -30,11 +31,11 @@ public class TaskManager implements TaskService {
     private ModelMapperService mapperService;
 
     @Override
-    public DataResult<List<GetTaskResponse>> getAllTasks() {
+    public DataResult<List<GetTaskListResponse>> getAllTasks() {
         List<Task> tasks = this.taskRepository.findAll();
-        List<GetTaskResponse> responses = tasks.stream().map(task -> this.mapperService
+        List<GetTaskListResponse> responses = tasks.stream().map(task -> this.mapperService
                 .forResponse()
-                .map(task, GetTaskResponse.class))
+                .map(task, GetTaskListResponse.class))
                 .toList();
 
         return new SuccessDataResult<>(responses, MessageConstants.GET_ALL.getMessage());
@@ -54,6 +55,12 @@ public class TaskManager implements TaskService {
     public Result addTask(@Valid AddTaskRequest addTaskRequest) {
         Task task = this.mapperService.forRequest().map(addTaskRequest, Task.class);
 
+        task.setId(null);
+
+        List<Label> labels = labelRepository.findAllById(addTaskRequest.getLabelIds());
+
+        task.setLabels(labels);
+
         this.taskRepository.save(task);
 
         return new SuccessResult(MessageConstants.ADD.getMessage());
@@ -61,11 +68,19 @@ public class TaskManager implements TaskService {
 
     @Override
     public Result updateTask(UpdateTaskRequest updateTaskRequest) {
-        this.taskRepository.findById(updateTaskRequest.getId()).orElseThrow(() -> new NotFoundException(MessageConstants.TASK.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
 
-        Task task = this.mapperService.forRequest().map(updateTaskRequest, Task.class);
+        Task task = this.taskRepository.findById(updateTaskRequest.getId())
+                .orElseThrow(() -> new NotFoundException(MessageConstants.TASK.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
+
+
+        this.mapperService.forRequest().map(updateTaskRequest, task);
+
+        List<Label> labels = labelRepository.findAllById(updateTaskRequest.getLabelIds());
+
+        task.setLabels(labels);
 
         this.taskRepository.save(task);
+
         return new SuccessResult(MessageConstants.UPDATE.getMessage());
     }
 
@@ -78,7 +93,6 @@ public class TaskManager implements TaskService {
 
         return new SuccessResult(MessageConstants.DELETE.getMessage());
     }
-    // Add a label to a task
     @Override
 
     public Result addLabelToTask(int taskId, int labelId) {
@@ -92,7 +106,6 @@ public class TaskManager implements TaskService {
         return new SuccessResult(MessageConstants.ADD.getMessage());
     }
 
-    //get all tasks by label id
     @Override
     public DataResult<List<GetTaskResponse>> getAllTasksByLabelId(int labelId) {
         Label label = this.labelRepository.findById(labelId).orElseThrow(() -> new NotFoundException(MessageConstants.LABEL.getMessage() + MessageConstants.NOT_FOUND.getMessage()));

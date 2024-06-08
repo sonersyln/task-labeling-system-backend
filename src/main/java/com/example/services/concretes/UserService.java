@@ -39,6 +39,7 @@ public class UserService {
                 .authorities(request.getAuthorities())
 
             .build();
+
         return this.userRepository.save(newUser);
     }
 

@@ -16,7 +16,7 @@ import java.util.Set;
 public class UpdateTaskRequest {
     @NotNull(message = "The task id cannot be null.")
     @Positive(message = "Id must be a positive number.")
-    private int id;
+    private Integer id;
 
     @NotNull(message = "The task name cannot be null.")
     @NotBlank(message = "The task name can't be empty.")
