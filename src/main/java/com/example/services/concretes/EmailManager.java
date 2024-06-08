@@ -1,7 +1,6 @@
 package com.example.services.concretes;
 
 import com.example.services.abstracts.EmailService;
-import com.example.services.dtos.requests.AddTaskRequest;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
@@ -23,7 +22,7 @@ public class EmailManager implements EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
         helper.setFrom("noreply@rentogo.com.tr", "Rent2Go Şirketi");
-        helper.setTo(to);  // Alıcının e-posta adresini burada belirtin
+        helper.setTo(to);
         helper.setSubject("Yeni Görev Eklendi");
 
         String htmlMsg = "<div style=\"font-family: Arial, sans-serif; color: #333;\">"

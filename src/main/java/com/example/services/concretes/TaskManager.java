@@ -42,8 +42,8 @@ public class TaskManager implements TaskService {
     public DataResult<List<GetTaskListResponse>> getAllTasks() {
         List<Task> tasks = this.taskRepository.findAll();
         List<GetTaskListResponse> responses = tasks.stream().map(task -> this.mapperService
-                .forResponse()
-                .map(task, GetTaskListResponse.class))
+                        .forResponse()
+                        .map(task, GetTaskListResponse.class))
                 .toList();
 
         return new SuccessDataResult<>(responses, MessageConstants.GET_ALL.getMessage());
@@ -71,12 +71,11 @@ public class TaskManager implements TaskService {
                 .orElseThrow(() -> new NotFoundException(MessageConstants.USER.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
 
 
-
         this.taskRepository.save(task);
 
 
-            String labelNames = labels.stream().map(Label::getName).collect(Collectors.joining(", "));
-            emailService.sendTaskAddEmail(user.getEmail(), user.getUsername(), task.getName(), labelNames);
+        String labelNames = labels.stream().map(Label::getName).collect(Collectors.joining(", "));
+        emailService.sendTaskAddEmail(user.getEmail(), user.getUsername(), task.getName(), labelNames);
 
         return new SuccessResult(MessageConstants.ADD.getMessage());
     }
@@ -108,6 +107,7 @@ public class TaskManager implements TaskService {
 
         return new SuccessResult(MessageConstants.DELETE.getMessage());
     }
+
     @Override
 
     public Result addLabelToTask(int taskId, int labelId) {
@@ -127,8 +127,8 @@ public class TaskManager implements TaskService {
 
         List<Task> tasks = label.getTasks();
         List<GetTaskResponse> responses = tasks.stream().map(task -> this.mapperService
-                .forResponse()
-                .map(task, GetTaskResponse.class))
+                        .forResponse()
+                        .map(task, GetTaskResponse.class))
                 .toList();
 
         return new SuccessDataResult<>(responses, MessageConstants.GET_ALL.getMessage());
