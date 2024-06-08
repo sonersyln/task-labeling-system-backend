@@ -7,11 +7,13 @@ import com.example.services.dtos.requests.AddTaskRequest;
 import com.example.services.dtos.requests.UpdateTaskRequest;
 import com.example.services.dtos.responses.GetTaskListResponse;
 import com.example.services.dtos.responses.GetTaskResponse;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RestController
@@ -34,7 +36,7 @@ public class TaskController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Result addTask(@RequestBody AddTaskRequest addTaskRequest) {
+    public Result addTask(@RequestBody AddTaskRequest addTaskRequest) throws MessagingException, UnsupportedEncodingException {
         return this.taskService.addTask(addTaskRequest);
     }
 

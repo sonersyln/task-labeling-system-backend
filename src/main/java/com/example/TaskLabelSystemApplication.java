@@ -30,10 +30,7 @@ public class TaskLabelSystemApplication implements CommandLineRunner {
         return new ModelMapper();
     }
 
-    @Bean
-    public JavaMailSender javaMailSender() {
-        return new JavaMailSenderImpl();
-    }
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -49,7 +46,7 @@ public class TaskLabelSystemApplication implements CommandLineRunner {
                 .build();
 
         AddUserRequest request2 = AddUserRequest.builder()
-                .username("soner")
+                .username("Soner")
                 .password("soner")
                 .email("syln.soner@gmail.com")
                 .authorities(Set.of(Role.ROLE_USER))

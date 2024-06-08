@@ -6,15 +6,17 @@ import com.example.services.dtos.requests.AddTaskRequest;
 import com.example.services.dtos.requests.UpdateTaskRequest;
 import com.example.services.dtos.responses.GetTaskListResponse;
 import com.example.services.dtos.responses.GetTaskResponse;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public interface TaskService {
     DataResult<List<GetTaskListResponse>> getAllTasks();
     DataResult<GetTaskResponse> getById(int id);
 
-    Result addTask(@Valid AddTaskRequest addTaskRequest);
+    Result addTask(@Valid AddTaskRequest addTaskRequest) throws MessagingException, UnsupportedEncodingException;
 
     Result addLabelToTask(int taskId, int labelId);
 

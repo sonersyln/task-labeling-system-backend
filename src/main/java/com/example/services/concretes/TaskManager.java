@@ -9,18 +9,24 @@ import com.example.core.utilities.results.SuccessDataResult;
 import com.example.core.utilities.results.SuccessResult;
 import com.example.models.Label;
 import com.example.models.Task;
+import com.example.models.User;
 import com.example.repositories.LabelRepository;
 import com.example.repositories.TaskRepository;
+import com.example.repositories.UserRepository;
+import com.example.services.abstracts.EmailService;
 import com.example.services.abstracts.TaskService;
 import com.example.services.dtos.requests.AddTaskRequest;
 import com.example.services.dtos.requests.UpdateTaskRequest;
 import com.example.services.dtos.responses.GetTaskListResponse;
 import com.example.services.dtos.responses.GetTaskResponse;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,6 +34,8 @@ public class TaskManager implements TaskService {
 
     private final TaskRepository taskRepository;
     private final LabelRepository labelRepository;
+    private final UserRepository userRepository;
+    private final EmailService emailService;
     private ModelMapperService mapperService;
 
     @Override
@@ -52,16 +60,23 @@ public class TaskManager implements TaskService {
     }
 
     @Override
-    public Result addTask(@Valid AddTaskRequest addTaskRequest) {
+    public Result addTask(@Valid AddTaskRequest addTaskRequest) throws MessagingException, UnsupportedEncodingException {
         Task task = this.mapperService.forRequest().map(addTaskRequest, Task.class);
-
         task.setId(null);
 
         List<Label> labels = labelRepository.findAllById(addTaskRequest.getLabelIds());
-
         task.setLabels(labels);
 
+        User user = this.userRepository.findById(addTaskRequest.getUserId())
+                .orElseThrow(() -> new NotFoundException(MessageConstants.USER.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
+
+
+
         this.taskRepository.save(task);
+
+
+            String labelNames = labels.stream().map(Label::getName).collect(Collectors.joining(", "));
+            emailService.sendTaskAddEmail(user.getEmail(), user.getUsername(), task.getName(), labelNames);
 
         return new SuccessResult(MessageConstants.ADD.getMessage());
     }
