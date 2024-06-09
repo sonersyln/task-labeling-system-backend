@@ -1,4 +1,4 @@
-package com.example.services.dtos.requests;
+package com.example.services.dtos.requests.taskRequests;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -2,8 +2,8 @@ package com.example.services.abstracts;
 
 import com.example.core.utilities.results.DataResult;
 import com.example.core.utilities.results.Result;
-import com.example.services.dtos.requests.AddTaskRequest;
-import com.example.services.dtos.requests.UpdateTaskRequest;
+import com.example.services.dtos.requests.taskRequests.AddTaskRequest;
+import com.example.services.dtos.requests.taskRequests.UpdateTaskRequest;
 import com.example.services.dtos.responses.GetTaskListResponse;
 import com.example.services.dtos.responses.GetTaskResponse;
 import jakarta.mail.MessagingException;

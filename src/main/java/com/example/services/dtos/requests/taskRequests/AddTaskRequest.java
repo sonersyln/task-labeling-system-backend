@@ -1,4 +1,4 @@
-package com.example.services.dtos.requests;
+package com.example.services.dtos.requests.taskRequests;
 
 import com.example.models.Label;
 import com.example.models.User;

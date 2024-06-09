@@ -3,8 +3,8 @@ package com.example.controllers;
 import com.example.core.utilities.results.DataResult;
 import com.example.core.utilities.results.Result;
 import com.example.services.abstracts.TaskService;
-import com.example.services.dtos.requests.AddTaskRequest;
-import com.example.services.dtos.requests.UpdateTaskRequest;
+import com.example.services.dtos.requests.taskRequests.AddTaskRequest;
+import com.example.services.dtos.requests.taskRequests.UpdateTaskRequest;
 import com.example.services.dtos.responses.GetTaskListResponse;
 import com.example.services.dtos.responses.GetTaskResponse;
 import jakarta.mail.MessagingException;
@@ -36,7 +36,7 @@ public class TaskController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Result addTask(@RequestBody AddTaskRequest addTaskRequest) throws MessagingException, UnsupportedEncodingException {
+    public Result addTask(@RequestBody @Valid AddTaskRequest addTaskRequest) throws MessagingException, UnsupportedEncodingException {
         return this.taskService.addTask(addTaskRequest);
     }
 
