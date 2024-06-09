@@ -3,8 +3,8 @@ package com.example.controllers;
 import com.example.core.utilities.results.DataResult;
 import com.example.core.utilities.results.Result;
 import com.example.services.abstracts.LabelService;
-import com.example.services.dtos.requests.AddLabelRequest;
-import com.example.services.dtos.requests.UpdateLabelRequest;
+import com.example.services.dtos.requests.labelRequests.AddLabelRequest;
+import com.example.services.dtos.requests.labelRequests.UpdateLabelRequest;
 import com.example.services.dtos.responses.GetLabelResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class LabelController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Result addLabel(@RequestBody AddLabelRequest addLabelRequest) {
+    public Result addLabel(@RequestBody @Valid AddLabelRequest addLabelRequest) {
         return this.labelService.addLabel(addLabelRequest);
     }
 

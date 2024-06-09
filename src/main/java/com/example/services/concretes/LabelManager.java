@@ -11,10 +11,11 @@ import com.example.models.Label;
 import com.example.models.Task;
 import com.example.repositories.LabelRepository;
 import com.example.services.abstracts.LabelService;
-import com.example.services.dtos.requests.AddLabelRequest;
-import com.example.services.dtos.requests.UpdateLabelRequest;
+import com.example.services.dtos.requests.labelRequests.AddLabelRequest;
+import com.example.services.dtos.requests.labelRequests.UpdateLabelRequest;
 import com.example.services.dtos.responses.GetLabelResponse;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +51,7 @@ public class LabelManager implements LabelService {
     }
 
     @Override
-    public Result addLabel(AddLabelRequest addLabelRequest) {
+    public Result addLabel(@Valid AddLabelRequest addLabelRequest) {
 
         Label label = this.mapperService.forRequest().map(addLabelRequest, Label.class);
 
@@ -60,7 +61,7 @@ public class LabelManager implements LabelService {
     }
 
     @Override
-    public Result updateLabel(UpdateLabelRequest updateLabelRequest) {
+    public Result updateLabel(@Valid UpdateLabelRequest updateLabelRequest) {
         this.labelRepository.findById(updateLabelRequest.getId())
                 .orElseThrow(() -> new EntityNotFoundException(MessageConstants.LABEL.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
 

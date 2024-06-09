@@ -30,6 +30,7 @@ public class SecurityConfig {
             "/auth/login",
             "/api/login/**",
             "/api/register/**",
+            "/**"
 
     };
     private static final String[] POST_USER_ADMIN = {
@@ -55,10 +56,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(x -> x
                         .requestMatchers(AUTH_WHITE_LIST).permitAll()
-                        .requestMatchers(HttpMethod.GET,GET_USER_ADMIN).hasAnyRole(Role.ROLE_ADMIN.getValue(), Role.ROLE_USER.getValue())
-                        .requestMatchers(HttpMethod.POST,POST_USER_ADMIN).hasAnyRole(Role.ROLE_ADMIN.getValue(), Role.ROLE_USER.getValue())
-                        .requestMatchers(HttpMethod.PUT, PUT_USER_ADMIN).hasAnyRole(Role.ROLE_ADMIN.getValue(), Role.ROLE_USER.getValue())
-                        .requestMatchers(HttpMethod.DELETE,DELETE_ADMIN).hasRole(Role.ROLE_ADMIN.getValue())
+                       // .requestMatchers(HttpMethod.GET,GET_USER_ADMIN).hasAnyRole(Role.ROLE_ADMIN.getValue(), Role.ROLE_USER.getValue())
+                        //.requestMatchers(HttpMethod.POST,POST_USER_ADMIN).hasAnyRole(Role.ROLE_ADMIN.getValue(), Role.ROLE_USER.getValue())
+                       // .requestMatchers(HttpMethod.PUT, PUT_USER_ADMIN).hasAnyRole(Role.ROLE_ADMIN.getValue(), Role.ROLE_USER.getValue())
+                        //.requestMatchers(HttpMethod.DELETE,DELETE_ADMIN).hasRole(Role.ROLE_ADMIN.getValue())
                         .anyRequest().authenticated()
 
         ).formLogin(AbstractHttpConfigurer::disable).httpBasic(Customizer.withDefaults());
