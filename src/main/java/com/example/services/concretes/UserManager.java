@@ -7,15 +7,19 @@ import com.example.models.User;
 import com.example.repositories.UserRepository;
 import com.example.services.dtos.requests.AddUserRequest;
 import com.example.services.dtos.requests.SignInRequest;
-import com.example.services.dtos.responses.GetUserResponse;
+import com.example.services.dtos.responses.GetAuthResponse;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+
 
     private final BCryptPasswordEncoder passwordEncoder;
 
@@ -44,8 +48,7 @@ public class UserService {
         return this.userRepository.save(newUser);
     }
 
-    public String singIn(SignInRequest request){
-
+    public GetAuthResponse signIn(SignInRequest request){
         Optional<User> user = this.userRepository.findByUsername(request.getUsername());
         if(user.isEmpty()){
             throw new NotFoundException(MessageConstants.USER_NOT_FOUND.getMessage());
@@ -54,8 +57,17 @@ public class UserService {
             throw new InvalidPasswordException(MessageConstants.INVALID_PASSWORD.getMessage());
         }
 
-        return request.getUsername();
+        User foundUser = user.get();
+        GetAuthResponse response = new GetAuthResponse(
+                foundUser.getUsername(),
+                foundUser.getPassword(),
+                foundUser.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet())
+        );
+
+        return response;
     }
+
+
 
 
 }

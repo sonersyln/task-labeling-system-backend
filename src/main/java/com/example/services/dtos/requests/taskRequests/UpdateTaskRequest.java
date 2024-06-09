@@ -3,6 +3,7 @@ package com.example.services.dtos.requests;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class UpdateTaskRequest {
 
     @NotNull(message = "The task name cannot be null.")
     @NotBlank(message = "The task name can't be empty.")
+    @Size(min = 3, max = 50, message = "Task must be between {min} and {max} characters.")
     private String name;
 
     private List<Integer> labelIds;

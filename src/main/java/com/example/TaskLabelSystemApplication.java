@@ -1,25 +1,23 @@
 package com.example;
 
 import com.example.models.Role;
-import com.example.services.concretes.UserService;
-import com.example.services.dtos.requests.AddUserRequest;
+import com.example.services.concretes.UserManager;
+import com.example.services.dtos.requests.userRequests.AddUserRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Set;
 
 @SpringBootApplication
 public class TaskLabelSystemApplication implements CommandLineRunner {
 
-    private final UserService userService;
+    private final UserManager userManager;
 
-    public TaskLabelSystemApplication(UserService userService) {
-        this.userService = userService;
+    public TaskLabelSystemApplication(UserManager userManager) {
+        this.userManager = userManager;
     }
 
     public static void main(String[] args) {
@@ -41,7 +39,7 @@ public class TaskLabelSystemApplication implements CommandLineRunner {
         AddUserRequest request = AddUserRequest.builder()
                 .username("admin")
                 .password("admin")
-                .email("syln.soner@gmail.com")
+                .email("soner@gdgmail.com")
                 .authorities(Set.of(Role.ROLE_ADMIN))
                 .build();
 
@@ -52,12 +50,12 @@ public class TaskLabelSystemApplication implements CommandLineRunner {
                 .authorities(Set.of(Role.ROLE_USER))
                 .build();
 
-        if (userService.getByUserName(request.getUsername()).isEmpty()) {
-            userService.createUser(request);
+        if (userManager.getByUserName(request.getUsername()).isEmpty()) {
+            userManager.createUser(request);
         }
 
-        if (userService.getByUserName(request2.getUsername()).isEmpty()) {
-            userService.createUser(request2);
+        if (userManager.getByUserName(request2.getUsername()).isEmpty()) {
+            userManager.createUser(request2);
         }
     }
 

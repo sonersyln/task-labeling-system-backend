@@ -14,10 +14,10 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserService userService;
+    private final UserManager userManager;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = this.userService.getByUserName(username);
+        Optional<User> user = this.userManager.getByUserName(username);
 
         return user.orElseThrow(() -> new NotFoundException(MessageConstants
                 .USER.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
