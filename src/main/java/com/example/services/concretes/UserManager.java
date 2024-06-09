@@ -5,9 +5,11 @@ import com.example.core.exceptions.NotFoundException;
 import com.example.core.utilities.constants.MessageConstants;
 import com.example.models.User;
 import com.example.repositories.UserRepository;
-import com.example.services.dtos.requests.AddUserRequest;
-import com.example.services.dtos.requests.SignInRequest;
+import com.example.services.dtos.requests.userRequests.AddUserRequest;
+import com.example.services.dtos.requests.userRequests.SignInRequest;
 import com.example.services.dtos.responses.GetAuthResponse;
+import com.example.services.rules.UserBusinessRules;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,22 +19,22 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class UserService {
+@AllArgsConstructor
+public class UserManager {
+
     private final UserRepository userRepository;
-
-
     private final BCryptPasswordEncoder passwordEncoder;
+    private final UserBusinessRules userBusinessRules;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+
 
     public Optional<User> getByUserName(String username) {
         return this.userRepository.findByUsername(username);
     }
 
     public User createUser(AddUserRequest request){
+
+        userBusinessRules.checkIfExistsByEmailAndUsername(request.getEmail(), request.getUsername());
         User newUser = User.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))

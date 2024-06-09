@@ -1,4 +1,4 @@
-package com.example.services.dtos.requests;
+package com.example.services.dtos.requests.userRequests;
 import com.example.models.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -24,8 +24,11 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
+    @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Task> tasks;
