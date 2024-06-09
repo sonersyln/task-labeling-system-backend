@@ -68,7 +68,7 @@ public class TaskManager implements TaskService {
         List<Label> labels = labelRepository.findAllById(addTaskRequest.getLabelIds());
         task.setLabels(labels);
 
-        User user = this.userRepository.findById(addTaskRequest.getUserId())
+        User user = this.userRepository.findByUsername(addTaskRequest.getUsername())
                 .orElseThrow(() -> new NotFoundException(MessageConstants.USER.getMessage() + MessageConstants.NOT_FOUND.getMessage()));
 
 

@@ -7,6 +7,7 @@ import com.example.models.User;
 import com.example.repositories.UserRepository;
 import com.example.services.dtos.requests.AddUserRequest;
 import com.example.services.dtos.requests.SignInRequest;
+import com.example.services.dtos.responses.GetUserResponse;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class UserService {
         return this.userRepository.save(newUser);
     }
 
-    public void singIn(SignInRequest request){
+    public String singIn(SignInRequest request){
 
         Optional<User> user = this.userRepository.findByUsername(request.getUsername());
         if(user.isEmpty()){
@@ -52,6 +53,8 @@ public class UserService {
         if(!passwordEncoder.matches(request.getPassword(), user.get().getPassword())){
             throw new InvalidPasswordException(MessageConstants.INVALID_PASSWORD.getMessage());
         }
+
+        return request.getUsername();
     }
 
 

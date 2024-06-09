@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api")
 @AllArgsConstructor
 @CrossOrigin
 public class UserController {
@@ -15,8 +15,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public void login(@RequestBody SignInRequest request) throws Exception {
-        this.userService.singIn(request);
+    public String login(@RequestBody SignInRequest request) throws Exception {
+        return this.userService.singIn(request);
     }
 
     @PostMapping("/register")

@@ -23,6 +23,7 @@ public class AddTaskRequest {
     @NotEmpty(message = "The label ids cannot be empty.")
     private List<Integer> labelIds;
 
-    @NotEmpty(message = "The user id cannot be empty.")
-    private int userId;
+    @NotNull(message = "The username cannot be null.")
+    @NotBlank(message = "The username can't be empty.")
+    private String username;
 }
