@@ -1,6 +1,5 @@
 package com.example.services.abstracts;
 
-import com.example.services.dtos.requests.AddTaskRequest;
 import jakarta.mail.MessagingException;
 
 import java.io.UnsupportedEncodingException;

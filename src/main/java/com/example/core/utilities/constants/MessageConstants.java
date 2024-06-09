@@ -1,19 +1,20 @@
 package com.example.core.utilities.constants;
 
 public enum MessageConstants {
-    LABEL("Label"),
-    NOT_FOUND(" not found!"),
-    TASK("Task"),
-    USER("User"),
+    LABEL("Etiket"),
+    NOT_FOUND(" bulunamadı!"),
+    TASK("Görev"),
+    USER("Kullanıcı"),
 
-
-    ADD("The addition operation was successful!"),
-    UPDATE("The update operation was successful!"),
-    DELETE("The deletion operation was successful!"),
-    GET_ALL("All records were listed!"),
-    GET("The record was found!"),
-    INVALID_PASSWORD("Invalid Password"),
-    USER_NOT_FOUND("User not found!");
+    ADD("Ekleme işlemi başarılı!"),
+    UPDATE("Güncelleme işlemi başarılı!"),
+    DELETE("Silme işlemi başarılı!"),
+    GET_ALL("Tüm kayıtlar listelendi!"),
+    GET("Kayıt getirildi!"),
+    INVALID_PASSWORD("Geçersiz Şifre"),
+    USER_NOT_FOUND("Kullanıcı bulunamadı!"),
+    EMAIL_ALREADY_EXISTS("Bu e-posta zaten kullanımda!"),
+    USERNAME_ALREADY_EXISTS("Bu kullanıcı adı zaten kullanımda!");
 
     private final String message;
 

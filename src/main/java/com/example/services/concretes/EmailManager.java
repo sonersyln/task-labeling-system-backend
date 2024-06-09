@@ -22,20 +22,20 @@ public class EmailManager implements EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
         helper.setFrom("noreply@rentogo.com.tr", "Rent2Go Şirketi");
-        helper.setTo(to);
+        helper.setTo("contact.rent2go@gmail.com");
         helper.setSubject("Yeni Görev Eklendi");
 
         String htmlMsg = "<div style=\"font-family: Arial, sans-serif; color: #333;\">"
-                + "<p style=\"font-size: 18px;\">Sayın " + username + ",</p>"
-                + "<p>Adı '<b>" + taskName + "</b>' olan yeni görevinizin, şu etiketlere eklediğini bildirmek isteriz: " + labelNames + ".</p>"
-                + "<p>Görevlerinizi düzenli tuttuğunuz için teşekkür ederiz. Görevlerinizi verimli bir şekilde yönetmenize yardımcı olmak için buradayız.</p>"
+                + "<p style=\"font-size: 18px;\">Kullanıcı sisteme giriş yaptı: " + to + ",</p>"
+                + "<p><b>" + username + "</b> adlı kullanıcı, '<b>" + taskName + "</b>' adında yeni bir görev ekledi. Bu görev, şu etiketlere eklenmiştir: <b>" + labelNames + "</b>.</p>"
+                + "<p>Görevi en kısa sürede ilgili departmana iletiniz.</p>"
                 + "<p>Saygılarımızla,</p>"
                 + "<p><b style=\"color: #007BFF;\">Rent2Go Ekibi</b></p>"
                 + "</div>";
 
         String textMsg = "Sayın " + username + ",\n"
-                + "Adı '" + taskName + "' olan yeni görevinizin, şu etiketlere eklediğini bildirmek isteriz: " + labelNames + ".\n"
-                + "Görevlerinizi düzenli tuttuğunuz için teşekkür ederiz. Görevlerinizi verimli bir şekilde yönetmenize yardımcı olmak için buradayız.\n"
+                + username + " adlı kullanıcı, '" + taskName + "' adında yeni bir görev ekledi. Bu görev, şu etiketlere eklenmiştir: " + labelNames + ".\n"
+                + "Görevi en kısa sürede ilgili departmana iletiniz.\n"
                 + "Saygılarımızla,\n"
                 + "Rent2Go Ekibi";
 
