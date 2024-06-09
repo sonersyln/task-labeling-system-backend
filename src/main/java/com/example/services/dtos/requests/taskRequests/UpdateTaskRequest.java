@@ -21,7 +21,7 @@ public class UpdateTaskRequest {
 
     @NotNull(message = "The task name cannot be null.")
     @NotBlank(message = "The task name can't be empty.")
-    @Size(min = 3, max = 50, message = "Task must be between {min} and {max} characters.")
+    @Size(min = 3, max = 80, message = "Task must be between {min} and {max} characters.")
     private String name;
 
     private List<Integer> labelIds;
