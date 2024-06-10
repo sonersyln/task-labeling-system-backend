@@ -30,6 +30,9 @@ public class User implements UserDetails {
     private String password;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Task> tasks;
 
@@ -46,9 +49,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities.stream()
-                .map(role -> (GrantedAuthority) role)
-                .collect(Collectors.toList());
+        return List.of(new SimpleGrantedAuthority(this.role.getValue()));
     }
 
     @Override

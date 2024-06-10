@@ -3,6 +3,7 @@ package com.example.services.concretes;
 import com.example.core.exceptions.InvalidPasswordException;
 import com.example.core.exceptions.NotFoundException;
 import com.example.core.utilities.constants.MessageConstants;
+import com.example.models.Role;
 import com.example.models.User;
 import com.example.repositories.UserRepository;
 import com.example.services.dtos.requests.userRequests.AddUserRequest;
@@ -44,6 +45,7 @@ public class UserManager {
                 .accountNonLocked(true)
                 .credentialsNonExpired(true)
                 .authorities(request.getAuthorities())
+                .role(Role.ROLE_USER)
 
             .build();
 
