@@ -35,7 +35,7 @@ public class TaskLabelSystemApplication implements CommandLineRunner {
         createAdmin();
     }
 
-    private void createAdmin() {
+    private void createAdmin() throws Exception {
         AddUserRequest request = AddUserRequest.builder()
                 .username("admin")
                 .password("admin")

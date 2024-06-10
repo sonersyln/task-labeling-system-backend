@@ -14,8 +14,9 @@ public enum MessageConstants {
     INVALID_PASSWORD("Geçersiz Şifre"),
     USER_NOT_FOUND("Kullanıcı bulunamadı!"),
     EMAIL_ALREADY_EXISTS("Bu e-posta zaten kullanımda!"),
-    USERNAME_ALREADY_EXISTS("Bu kullanıcı adı zaten kullanımda!");
+    USERNAME_ALREADY_EXISTS("Bu kullanıcı adı zaten kullanımda!"),
 
+    IDCARD_VALIDATION_FAILED("TC Kimlik doğrulama başarısız!");
     private final String message;
 
     MessageConstants(String message) {

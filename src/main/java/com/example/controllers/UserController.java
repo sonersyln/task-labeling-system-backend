@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.services.concretes.UserManager;
 import com.example.services.dtos.requests.userRequests.AddUserRequest;
+import com.example.services.dtos.requests.userRequests.MernisRequest;
 import com.example.services.dtos.requests.userRequests.SignInRequest;
 import com.example.services.dtos.responses.GetAuthResponse;
 import lombok.AllArgsConstructor;
@@ -21,8 +22,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public void register(@RequestBody AddUserRequest request) {
+    public void register(@RequestBody AddUserRequest request) throws Exception {
         this.userManager.createUser(request);
+    }
+
+    @PostMapping("/createUser")
+    public void createUser(@RequestBody MernisRequest request) throws Exception {
+        this.userManager.createUserIdCardValidation(request);
     }
 
     //TODO

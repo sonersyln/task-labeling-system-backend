@@ -7,6 +7,7 @@ import com.example.models.Role;
 import com.example.models.User;
 import com.example.repositories.UserRepository;
 import com.example.services.dtos.requests.userRequests.AddUserRequest;
+import com.example.services.dtos.requests.userRequests.MernisRequest;
 import com.example.services.dtos.requests.userRequests.SignInRequest;
 import com.example.services.dtos.responses.GetAuthResponse;
 import com.example.services.rules.UserBusinessRules;
@@ -33,7 +34,29 @@ public class UserManager {
         return this.userRepository.findByUsername(username);
     }
 
-    public User createUser(AddUserRequest request){
+    public User createUserIdCardValidation(MernisRequest request) throws Exception {
+
+        userBusinessRules.checkIfExistsByEmailAndUsername(request.getEmail(), request.getUsername());
+        userBusinessRules.tcKimlikDogrula(request.getIdCardNumber(), request.getName(), request.getSurname(), request.getBirthYear());
+        User newUser = User.builder()
+                .username(request.getUsername())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .email(request.getEmail())
+                .idCardNumber(request.getIdCardNumber())
+                .birthYear(request.getBirthYear())
+                .name(request.getName())
+                .surname(request.getSurname())
+                .accountNonExpired(true)
+                .isEnabled(true)
+                .accountNonLocked(true)
+                .credentialsNonExpired(true)
+                .role(Role.ROLE_USER)
+
+            .build();
+
+        return this.userRepository.save(newUser);
+    }
+    public User createUser(AddUserRequest request) throws Exception {
 
         userBusinessRules.checkIfExistsByEmailAndUsername(request.getEmail(), request.getUsername());
         User newUser = User.builder()
@@ -47,7 +70,7 @@ public class UserManager {
                 .authorities(request.getAuthorities())
                 .role(Role.ROLE_USER)
 
-            .build();
+                .build();
 
         return this.userRepository.save(newUser);
     }

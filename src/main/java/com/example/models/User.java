@@ -30,6 +30,14 @@ public class User implements UserDetails {
     private String password;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+    @Column(name = "idCardNumber", unique = true)
+    private Long idCardNumber;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "surname")
+    private String surname;
+    @Column(name = "birthYear")
+    private Integer birthYear;
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
