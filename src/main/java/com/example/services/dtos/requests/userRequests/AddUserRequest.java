@@ -17,5 +17,6 @@ public class AddUserRequest {
     private String password;
     private String email;
     Set<Role> authorities;
+    private Role role;
 
 }

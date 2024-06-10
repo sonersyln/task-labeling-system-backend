@@ -1,4 +1,4 @@
-package com.example.services.dtos.requests;
+package com.example.services.dtos.requests.authRequests;
 
 public record AuthRequest (
         String username,

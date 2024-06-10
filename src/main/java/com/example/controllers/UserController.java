@@ -1,6 +1,7 @@
 package com.example.controllers;
 
-import com.example.services.concretes.UserManager;
+import com.example.services.concretes.UserService;
+import com.example.services.dtos.requests.authRequests.AuthRequest;
 import com.example.services.dtos.requests.userRequests.AddUserRequest;
 import com.example.services.dtos.requests.userRequests.MernisRequest;
 import com.example.services.dtos.requests.userRequests.SignInRequest;
@@ -14,22 +15,15 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class UserController {
 
-    private final UserManager userManager;
+    private final UserService userService;
 
-    @PostMapping("/login")
-    public GetAuthResponse login(@RequestBody SignInRequest request) throws Exception {
-        return this.userManager.signIn(request);
-    }
 
-    @PostMapping("/register")
-    public void register(@RequestBody AddUserRequest request) throws Exception {
-        this.userManager.createUser(request);
-    }
 
     @PostMapping("/createUser")
     public void createUser(@RequestBody MernisRequest request) throws Exception {
-        this.userManager.createUserIdCardValidation(request);
+        this.userService.createUserIdCardValidation(request);
     }
+
 
     //TODO
     // GetbyId oluştur ve task ekleme methodunda bunu kullan
