@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 @AllArgsConstructor
 @CrossOrigin
 public class UserController {
@@ -19,7 +19,7 @@ public class UserController {
 
 
 
-    @PostMapping("/createUser")
+    @PostMapping("/IdCardConfirmation")
     public void createUser(@RequestBody MernisRequest request) throws Exception {
         this.userService.createUserIdCardValidation(request);
     }
