@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import java.io.UnsupportedEncodingException;
 
@@ -15,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 @AllArgsConstructor
 public class EmailManager implements EmailService {
     private JavaMailSender mailSender;
+    private SpringTemplateEngine templateEngine;
 
 
 
@@ -30,24 +33,16 @@ public class EmailManager implements EmailService {
         helper.setTo(MailConstants.RECEIVER_EMAIL.getValue());
         helper.setSubject(MailConstants.SUBJECT.getValue());
 
-        String htmlMsg = "<div style=\"font-family: Arial, sans-serif; color: #333;\">"
-                + "<p style=\"font-size: 18px;\">Kullanıcı sisteme giriş yaptı: " + to + ",</p>"
-                + "<p><b>" + username + "</b> adlı kullanıcı, '<b>" + taskName +
-                "</b>' adında yeni bir görev ekledi. Bu görev, şu etiketlere eklenmiştir: " +
-                "<b>" + labelNames + "</b>.</p>"
-                + "<p>Görevi en kısa sürede ilgili departmana iletiniz.</p>"
-                + "<p>Saygılarımızla,</p>"
-                + "<p><b style=\"color: #007BFF;\">Rent2Go Ekibi</b></p>"
-                + "</div>";
+        Context context = new Context();
+        context.setVariable("to", to);
+        context.setVariable("username", username);
+        context.setVariable("taskName", taskName);
+        context.setVariable("labelNames", labelNames);
 
-        String textMsg = "Sayın " + username + ",\n"
-                + username + " adlı kullanıcı, '" + taskName + "' adında yeni bir görev ekledi. " +
-                "Bu görev, şu etiketlere eklenmiştir: " + labelNames + ".\n"
-                + "Görevi en kısa sürede ilgili departmana iletiniz.\n"
-                + "Saygılarımızla,\n"
-                + "Rent2Go Ekibi";
+        String htmlContent = templateEngine.process("email-template.html", context);
+        String textContent = templateEngine.process("email-template.txt", context);
 
-        helper.setText(textMsg, htmlMsg);
+        helper.setText(textContent, htmlContent);
 
         mailSender.send(message);
     }

@@ -1,0 +1,5 @@
+Sayın [[${username}]],
+[[${username}]] adlı kullanıcı, '[[${taskName}]]' adında yeni bir görev ekledi. Bu görev, şu etiketlere eklenmiştir: [[${labelNames}]].
+Görevi en kısa sürede ilgili departmana iletiniz.
+Saygılarımızla,
+Rent2Go Ekibi

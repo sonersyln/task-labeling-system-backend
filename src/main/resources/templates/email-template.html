@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .header {
+            font-size: 18px;
+        }
+
+        .highlight {
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+<p class="header">Kullanıcı sisteme giriş yaptı: <span th:text="${to}">[to]</span>,</p>
+<p><b th:text="${username}">[username]</b> adlı kullanıcı, '<b th:text="${taskName}">[taskName]</b>' adında yeni bir
+    görev ekledi. Bu görev, şu etiketlere eklenmiştir:
+    <b th:text="${labelNames}">[labelNames]</b>.</p>
+<p>Görevi en kısa sürede ilgili departmana iletiniz.</p>
+<p>Saygılarımızla,</p>
+<p><b class="highlight">Rent2Go Ekibi</b></p>
+</body>
+</html>
