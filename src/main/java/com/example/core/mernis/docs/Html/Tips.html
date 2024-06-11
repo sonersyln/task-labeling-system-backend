@@ -25,7 +25,7 @@
     </p>
     <pre>
     <code class="java">
-EUUKPSPublicSoap service = new EUUKPSPublicSoap();
+QVWKPSPublicSoap service = new QVWKPSPublicSoap();
 service.httpHeaders.add(new HeaderProperty("Authorization", "Basic " +
 org.kobjects.base64.Base64.encode("user:password".getBytes())));
 service.TCKimlikNoDogrula();
@@ -118,7 +118,7 @@ for (PropertyInfo info : profileInfo.any)
 
     <pre>
     <code class="java">
-public class MyService extends EUUKPSPublicSoap
+public class MyService extends QVWKPSPublicSoap
 {
     @Override
     protected Transport createTransport() {
@@ -157,7 +157,7 @@ public class MyService extends EUUKPSPublicSoap
 }
         </code>
 </pre>
-    <p>Now to connect to your web service you should use MyService class instead of EUUKPSPublicSoap.</p>
+    <p>Now to connect to your web service you should use MyService class instead of QVWKPSPublicSoap.</p>
 
 <br />
 <br />
@@ -193,7 +193,7 @@ public class MyService extends EUUKPSPublicSoap
     </code>
 </pre>
 <p>
-    Next is to create an instance of this class and set it into EUUExtendedSoapSerializationEnvelope. You need to do this before you connect to your webservice.
+    Next is to create an instance of this class and set it into QVWExtendedSoapSerializationEnvelope. You need to do this before you connect to your webservice.
 </p>
 <pre>
     <code class="java">

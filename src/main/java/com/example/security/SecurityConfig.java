@@ -48,7 +48,8 @@ public class SecurityConfig {
             "/auth/login",
             "/api/login/**",
             "/api/register/**",
-            "api/login/**", "api/register/**", "api/createUser/**"
+            "api/login/**", "api/register/**", "api/createUser/**",
+            "/api/users/IdCardConfirmation/**"
 
     };
     private static final String[] POST_USER_ADMIN = {

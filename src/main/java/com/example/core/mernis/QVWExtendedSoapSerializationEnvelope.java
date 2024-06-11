@@ -10,7 +10,7 @@ package com.example.core.mernis;
 // To use it in commercial project, you need to generate this class again with Premium account.
 // Check https://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account.
 //
-// Licence: 13B34E4ADE4497FA727AC265F7D6B716273951503B0EC3F4B1E51EE9CB8738F80E480B5A6BD460A4A8521F33CBC0AF395D24A807702F122F4FBA501174228979
+// Licence: 1A868373920EE2FF06DD01C670AD41B4B0220C6A79BEB6A1D9142928D14554766C04D7056647FBD46F9ECE10A326A8348375D565EF71CC6CD6CF3BF436D46F34
 //------------------------------------------------------------------------
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.*;
@@ -32,13 +32,13 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 
-class EUUSoapFaultEx extends org.ksoap2.SoapFault
+class QVWSoapFaultEx extends org.ksoap2.SoapFault
 {
     public Object fault;
 }
 
 //If you have a compilation error here then you have to add a reference to ExKsoap2.jar to your project (you can find it in Libs folder in the generated zip file)
-public class EUUExtendedSoapSerializationEnvelope extends com.easywsdl.exksoap2.serialization.ExSoapSerializationEnvelope {
+public class QVWExtendedSoapSerializationEnvelope extends com.easywsdl.exksoap2.serialization.ExSoapSerializationEnvelope {
     static HashMap< java.lang.String,java.lang.Class> classNames = new HashMap< java.lang.String, java.lang.Class>();
     public static String TAG="easyWSDL";
 
@@ -46,31 +46,31 @@ public class EUUExtendedSoapSerializationEnvelope extends com.easywsdl.exksoap2.
     private static final String TYPE_LABEL = "type";
     public boolean enableLogging;
 
-    public static void setDateTimeConverter(EUUDateTimeConverter converter)
+    public static void setDateTimeConverter(QVWDateTimeConverter converter)
     {
         if(converter==null)
         {
-            converter = new EUUStandardDateTimeConverter();
+            converter = new QVWStandardDateTimeConverter();
         }
         dateTimeConverter=converter;
     }
 
-    public static EUUDateTimeConverter getDateTimeConverter()
+    public static QVWDateTimeConverter getDateTimeConverter()
     {
         return dateTimeConverter;
     }
 
-    private static EUUDateTimeConverter dateTimeConverter = new EUUStandardDateTimeConverter();
+    private static QVWDateTimeConverter dateTimeConverter = new QVWStandardDateTimeConverter();
 
-    public EUUExtendedSoapSerializationEnvelope() {
+    public QVWExtendedSoapSerializationEnvelope() {
         this(SoapEnvelope.VER11);
     }
 
-    public EUUExtendedSoapSerializationEnvelope(int soapVersion) {
+    public QVWExtendedSoapSerializationEnvelope(int soapVersion) {
         super(soapVersion);
         implicitTypes = true;
         setAddAdornments(false);
-        new EUUMarshalGuid().register(this);
+        new QVWMarshalGuid().register(this);
         new MarshalFloat().register(this);
     }
 
@@ -124,7 +124,7 @@ public class EUUExtendedSoapSerializationEnvelope extends com.easywsdl.exksoap2.
         if (!type.multiRef && qName[2] == null )
         {
             if (!implicitTypes || (obj.getClass() != type.type && !(obj instanceof Vector ) && type.type!=java.lang.String.class  )) {
-                java.lang.String xmlName=EUUHelper.getKeyByValue(classNames,obj.getClass());
+                java.lang.String xmlName=QVWHelper.getKeyByValue(classNames,obj.getClass());
                 if(xmlName!=null) {
                     java.lang.String[] parts = xmlName.split("\\^\\^");
                     java.lang.String prefix = writer.getPrefix(parts[0], true);
@@ -211,7 +211,7 @@ public class EUUExtendedSoapSerializationEnvelope extends com.easywsdl.exksoap2.
     }
     private Object createObject(Object soap, Class cl) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Object obj=cl.newInstance();
-        Method ctor = obj.getClass().getMethod("loadFromSoap",Object.class,EUUExtendedSoapSerializationEnvelope.class);
+        Method ctor = obj.getClass().getMethod("loadFromSoap",Object.class,QVWExtendedSoapSerializationEnvelope.class);
         ctor.invoke(obj,soap,this);
         return obj;
     }
@@ -330,7 +330,7 @@ public class EUUExtendedSoapSerializationEnvelope extends com.easywsdl.exksoap2.
         {
             return "boolean";
         }
-        java.lang.String xmlName=EUUHelper.getKeyByValue(classNames,obj);
+        java.lang.String xmlName=QVWHelper.getKeyByValue(classNames,obj);
         if(xmlName==null)
         {
             return obj;

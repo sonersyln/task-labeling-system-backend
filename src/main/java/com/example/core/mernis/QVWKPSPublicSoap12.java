@@ -11,7 +11,7 @@ package com.example.core.mernis;
 // To use it in commercial project, you need to generate this class again with Premium account.
 // Check https://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account.
 //
-// Licence: 13B34E4ADE4497FA727AC265F7D6B716273951503B0EC3F4B1E51EE9CB8738F80E480B5A6BD460A4A8521F33CBC0AF395D24A807702F122F4FBA501174228979
+// Licence: 1A868373920EE2FF06DD01C670AD41B4B0220C6A79BEB6A1D9142928D14554766C04D7056647FBD46F9ECE10A326A8348375D565EF71CC6CD6CF3BF436D46F34
 //------------------------------------------------------------------------
 
 
@@ -26,13 +26,13 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class EUUKPSPublicSoap
+public class QVWKPSPublicSoap12
 {
-    interface EUUIWcfMethod
+    interface QVWIWcfMethod
     {
-        EUUExtendedSoapSerializationEnvelope CreateSoapEnvelope() throws java.lang.Exception;
+        QVWExtendedSoapSerializationEnvelope CreateSoapEnvelope() throws java.lang.Exception;
 
-        java.lang.Object ProcessResult(EUUExtendedSoapSerializationEnvelope __envelope,java.lang.Object result) throws java.lang.Exception;
+        java.lang.Object ProcessResult(QVWExtendedSoapSerializationEnvelope __envelope,java.lang.Object result) throws java.lang.Exception;
     }
 
     String url="https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx";
@@ -43,14 +43,14 @@ public class EUUKPSPublicSoap
     public boolean enableLogging;
 
 
-    public EUUKPSPublicSoap(){}
+    public QVWKPSPublicSoap12(){}
 
-    public EUUKPSPublicSoap(String url)
+    public QVWKPSPublicSoap12(String url)
     {
         this.url = url;
     }
 
-    public EUUKPSPublicSoap(String url,int timeOut)
+    public QVWKPSPublicSoap12(String url,int timeOut)
     {
         this.url = url;
         this.timeOut=timeOut;
@@ -83,15 +83,15 @@ public class EUUKPSPublicSoap
         return null;
     }
 
-    protected EUUExtendedSoapSerializationEnvelope createEnvelope()
+    protected QVWExtendedSoapSerializationEnvelope createEnvelope()
     {
-        EUUExtendedSoapSerializationEnvelope envelope= new EUUExtendedSoapSerializationEnvelope(EUUExtendedSoapSerializationEnvelope.VER11);
+        QVWExtendedSoapSerializationEnvelope envelope= new QVWExtendedSoapSerializationEnvelope(QVWExtendedSoapSerializationEnvelope.VER12);
         envelope.enableLogging = enableLogging;
     
         return envelope;
     }
 
-    protected java.util.List sendRequest(String methodName,EUUExtendedSoapSerializationEnvelope envelope,org.ksoap2.transport.Transport transport ,com.easywsdl.exksoap2.ws_specifications.profile.WS_Profile profile )throws java.lang.Exception
+    protected java.util.List sendRequest(String methodName,QVWExtendedSoapSerializationEnvelope envelope,org.ksoap2.transport.Transport transport ,com.easywsdl.exksoap2.ws_specifications.profile.WS_Profile profile )throws java.lang.Exception
     {
         if(transport instanceof com.easywsdl.exksoap2.transport.AdvancedHttpTransportSE )
         {
@@ -103,7 +103,7 @@ public class EUUKPSPublicSoap
         }
     }
 
-    java.lang.Object getResult(java.lang.Class destObj,java.lang.Object source,String resultName,EUUExtendedSoapSerializationEnvelope __envelope) throws java.lang.Exception
+    java.lang.Object getResult(java.lang.Class destObj,java.lang.Object source,String resultName,QVWExtendedSoapSerializationEnvelope __envelope) throws java.lang.Exception
     {
         if(source==null)
         {
@@ -145,11 +145,11 @@ public class EUUKPSPublicSoap
     public Boolean TCKimlikNoDogrula(final Long TCKimlikNo,final String Ad,final String Soyad,final Integer DogumYili) throws java.lang.Exception
     {
         com.easywsdl.exksoap2.ws_specifications.profile.WS_Profile __profile = new com.easywsdl.exksoap2.ws_specifications.profile.WS_Profile();
-        return (Boolean)execute(new EUUIWcfMethod()
+        return (Boolean)execute(new QVWIWcfMethod()
         {
             @Override
-            public EUUExtendedSoapSerializationEnvelope CreateSoapEnvelope(){
-                EUUExtendedSoapSerializationEnvelope __envelope = createEnvelope();
+            public QVWExtendedSoapSerializationEnvelope CreateSoapEnvelope(){
+                QVWExtendedSoapSerializationEnvelope __envelope = createEnvelope();
                 SoapObject __soapReq = new SoapObject("http://tckimlik.nvi.gov.tr/WS", "TCKimlikNoDogrula");
                 __envelope.setOutputSoapObject(__soapReq);
                 
@@ -182,7 +182,7 @@ public class EUUKPSPublicSoap
             }
             
             @Override
-            public java.lang.Object ProcessResult(EUUExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
+            public java.lang.Object ProcessResult(QVWExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 SoapObject __soap=(SoapObject)__result;
                 java.lang.Object obj = __soap.getProperty("TCKimlikNoDogrulaResult");        
                 if (obj instanceof SoapPrimitive)
@@ -198,11 +198,11 @@ public class EUUKPSPublicSoap
         },"http://tckimlik.nvi.gov.tr/WS/TCKimlikNoDogrula",__profile);
     }
 
-    protected java.lang.Object execute(EUUIWcfMethod wcfMethod,String methodName,com.easywsdl.exksoap2.ws_specifications.profile.WS_Profile profile) throws java.lang.Exception
+    protected java.lang.Object execute(QVWIWcfMethod wcfMethod,String methodName,com.easywsdl.exksoap2.ws_specifications.profile.WS_Profile profile) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
         __httpTransport.debug=enableLogging;
-        EUUExtendedSoapSerializationEnvelope __envelope=wcfMethod.CreateSoapEnvelope();
+        QVWExtendedSoapSerializationEnvelope __envelope=wcfMethod.CreateSoapEnvelope();
         try
         {
             sendRequest(methodName, __envelope, __httpTransport,profile);
@@ -228,7 +228,7 @@ public class EUUKPSPublicSoap
     }
 
 
-    protected java.lang.Exception convertToException(org.ksoap2.SoapFault fault,EUUExtendedSoapSerializationEnvelope envelope)
+    protected java.lang.Exception convertToException(org.ksoap2.SoapFault fault,QVWExtendedSoapSerializationEnvelope envelope)
     {
         org.ksoap2.SoapFault newException = fault;
         Object obj=null;

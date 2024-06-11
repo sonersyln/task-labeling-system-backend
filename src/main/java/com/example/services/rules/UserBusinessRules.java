@@ -2,7 +2,7 @@ package com.example.services.rules;
 
 import com.example.core.exceptions.AlreadyExistsException;
 import com.example.core.exceptions.NotFoundException;
-import com.example.core.mernis.EUUKPSPublicSoap;
+import com.example.core.mernis.QVWKPSPublicSoap;
 import com.example.core.utilities.constants.MessageConstants;
 import com.example.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class UserBusinessRules {
     }
 
     public void tcKimlikDogrula(Long TCKimlikNo, String Ad, String Soyad, Integer DogumYili) throws Exception {
-        EUUKPSPublicSoap soap = new EUUKPSPublicSoap();
+        QVWKPSPublicSoap soap = new QVWKPSPublicSoap();
         boolean result = soap.TCKimlikNoDogrula(TCKimlikNo, Ad, Soyad, DogumYili);
 
         if (!result) {

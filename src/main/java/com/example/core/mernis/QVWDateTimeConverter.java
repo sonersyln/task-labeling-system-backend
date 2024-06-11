@@ -11,12 +11,12 @@ package com.example.core.mernis;
 // To use it in commercial project, you need to generate this class again with Premium account.
 // Check https://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account.
 //
-// Licence: 13B34E4ADE4497FA727AC265F7D6B716273951503B0EC3F4B1E51EE9CB8738F80E480B5A6BD460A4A8521F33CBC0AF395D24A807702F122F4FBA501174228979
+// Licence: 1A868373920EE2FF06DD01C670AD41B4B0220C6A79BEB6A1D9142928D14554766C04D7056647FBD46F9ECE10A326A8348375D565EF71CC6CD6CF3BF436D46F34
 //------------------------------------------------------------------------
 import java.util.Date;
 
 
-public interface EUUDateTimeConverter
+public interface QVWDateTimeConverter
 {
     java.util.Date convertDateTime(String strDate);
     java.util.Date convertTime(String strDate);

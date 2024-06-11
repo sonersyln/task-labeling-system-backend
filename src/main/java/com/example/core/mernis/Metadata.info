@@ -4,7 +4,7 @@
     <Version>9.0.0.0</Version>
     <AccountType>Basic</AccountType>
     <LibrariesFolder>easywsdl</LibrariesFolder>
-    <MainClass>EUUKPSPublicSoap</MainClass>
+    <MainClass>QVWKPSPublicSoap</MainClass>
   </Info>
   <Settings>
     <Url>https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx</Url>
@@ -29,21 +29,21 @@
     <DetectDictionaries>false</DetectDictionaries>
   </Settings>
   <Files>
-    <File>docs/Html/EUUKPSPublicSoap.html</File>
-    <File>docs/Html/EUUKPSPublicSoap12.html</File>
-    <File>docs/Html/EUUKPSPublicSoap12_methods.html</File>
-    <File>docs/Html/EUUKPSPublicSoap_methods.html</File>
     <File>docs/Html/MTOMTransfer.html</File>
+    <File>docs/Html/QVWKPSPublicSoap.html</File>
+    <File>docs/Html/QVWKPSPublicSoap12.html</File>
+    <File>docs/Html/QVWKPSPublicSoap12_methods.html</File>
+    <File>docs/Html/QVWKPSPublicSoap_methods.html</File>
     <File>docs/Html/Tips.html</File>
     <File>docs/Index.html</File>
     <File>docs/Styles/Blueprint_Styles/Style.css</File>
-    <File>EUUDateTimeConverter.java</File>
-    <File>EUUExtendedSoapSerializationEnvelope.java</File>
-    <File>EUUHelper.java</File>
-    <File>EUUKPSPublicSoap.java</File>
-    <File>EUUKPSPublicSoap12.java</File>
-    <File>EUUMarshalGuid.java</File>
-    <File>EUUStandardDateTimeConverter.java</File>
+    <File>QVWDateTimeConverter.java</File>
+    <File>QVWExtendedSoapSerializationEnvelope.java</File>
+    <File>QVWHelper.java</File>
+    <File>QVWKPSPublicSoap.java</File>
+    <File>QVWKPSPublicSoap12.java</File>
+    <File>QVWMarshalGuid.java</File>
+    <File>QVWStandardDateTimeConverter.java</File>
   </Files>
   <Libraries>
     <File>ExKsoap2-1.0.4.0.jar</File>
